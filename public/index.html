@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<meta charset="UTF-8">
+<title>News - CMS</title>
+<link rel="stylesheet" type="text/css" href="css/pure.min.css">
+<script src="lib/angular/angular.js"></script>
+<script src="app.js"></script>
+<script src="services/service.js"></script>
+<script src="controllers/news.js"></script>
+</head>
+<body ng-controller="NewsCtrl">
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label>新闻标题</label>
+            <input ng-model="news.title" type="text" placeholder="新闻标题">
+        </div>
+
+        <div class="pure-control-group">
+            <label>新闻内容</label>
+            <textarea ng-model="news.content"></textarea>
+        </div>
+
+        <div class="pure-controls">
+
+            <button ng-click="sendNews()" type="button" class="pure-button pure-button-primary">提交</button>
+        </div>
+    </fieldset>
+</form>
+
+<ul>
+    <li ng-repeat="news in list">
+        {{news.title}}
+    </li>
+</ul>
+
+</body>
+</html>
