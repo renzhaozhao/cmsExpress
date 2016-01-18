@@ -7,61 +7,20 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-route/angular-route.min.js"></script>
 <script src="js/app.js"></script>
-<!-- <script src="js/service.js"></script> -->
-<!-- <script src="js/page.news.js"></script> -->
+<script src="js/service.js"></script>
+<script src="js/page.news.js"></script>
 </head>
 <body>
-<div ng-app="app">
-    <script type="text/ng-template" id="list.html">
-        <table class="pure-table" width="100%" border="1" style="border-collapse:collapse;">
-            <thead>
-                <td>id</td>
-                <td>标题</td>
-                <td>内容</td>
-                <td>发布时间</td>
-            </thead>
-            <tr ng-repeat="news in newsList">
-                <td>{{news.id}}</td>
-                <td><a href='#/detail/{{news.id}}'>{{news.title}}</a></td>
-                <td>{{news.content}}</td>
-                <td>{{news.date}}</td>
-            </tr>
-        </table>
-    </script>
-
-    <script type="text/ng-template" id="add.html">
-    <h1>添加新闻</h1>
-    标题：<input type="text" ng-model="title"><br>
-            内容：<textarea ng-model="content" cols="30" rows="10" style="vertical-align:top;"></textarea><br>
-                <button ng-click="add()">提交</button>
-    </script>
-
-    <script type="text/ng-template" id="edit.html">
-        <h1>编辑新闻{{news.id}}</h1>
-        标题：<input type="text" ng-model="news.title"><br>
-        内容：<textarea ng-model="news.content" cols="30" rows="10" style="vertical-align:top;"></textarea><br>
-        <button ng-click="update()">提交</button>
-    </script>
-
-    <script type="text/ng-template" id="detail.html">
-        <a href="#/list">返回列表</a>
-        <div id="container">
-            <a href="#/edit/{{news.id}}">编辑</a>
-            <h1>{{news.title}}</h1>
-            <span class="date">发布日期：{{news.date}}</span>
-            <div class="content">正文：   {{news.content}}</div>
-        </div>
-    </script>
-
-    <h1>新闻发布系统</h1>
-    <div id="content">
-        <div id="leftpanel">
+<div class="container" ng-app="app">
+    <h1 class="text-center">新闻发布系统</h1>
+    <div class="pure-g">
+        <div class="pure-u-1-6">
             <ul>
                 <li><a href="#/list">新闻列表</a></li>
                 <li><a href="#/add">发布新闻</a></li>
             </ul>
         </div>
-        <div id="right">
+        <div class="pure-u-5-6">
             <div id="rightpanel" ng-view>abcd</div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute'])
+var app = angular.module('app.news', [])
 
 .factory('News', function(){
     var newsList = [{
@@ -80,15 +80,16 @@ angular.module('app', ['ngRoute'])
     $scope.loadNews();
 })
 
-.controller('ListController',function($scope,News){
+.controller('ListCtrl',function($scope,News){
     $scope.newsList = News.all();
 })
 
-.controller('DetailController',function($scope, $routeParams){
-    $scope.news = newsList[$routeParams.id-1];
+.controller('DetailCtrl',function($scope,$routeParams,News){
+    $scope.news = News.all()[$routeParams.id-1];
 })
 
-.controller('AddController',function($scope,$location){
+.controller('AddCtrl',function($scope,$location,News){
+    var newsList = News.all();
     $scope.title = '';
     $scope.content = '';
     $scope.add = function(){
@@ -103,7 +104,8 @@ angular.module('app', ['ngRoute'])
     }
 })
 
-.controller('EditController',function($scope, $routeParams, $location){
+.controller('EditCtrl',function($scope, $routeParams, $location){
+    var newsList = News.all();
     $scope.news = newsList[$routeParams.id-1];
     $scope.update = function(){
         newsList[$routeParams.id-1] = $scope.news;
