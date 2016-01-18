@@ -4,7 +4,7 @@ var config = require('./config');
 module.exports = function(){
     var db = mongoose.connect(config.mongodb);
 
-    require('../app/models/news.server.model');
+    require('../mvc/models/model.news');
 
     return db;
 }

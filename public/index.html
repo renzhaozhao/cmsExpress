@@ -1,39 +1,70 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>News - CMS</title>
-<link rel="stylesheet" type="text/css" href="css/pure.min.css">
+<title>CMS后台管理系统</title>
+<link rel="stylesheet" type="text/css" href="css/style.min.css">
 <script src="lib/angular/angular.js"></script>
-<script src="app.js"></script>
-<script src="services/service.js"></script>
-<script src="controllers/news.js"></script>
+<script src="lib/angular-route/angular-route.min.js"></script>
+<script src="js/app.js"></script>
+<!-- <script src="js/service.js"></script> -->
+<!-- <script src="js/page.news.js"></script> -->
 </head>
-<body ng-controller="NewsCtrl">
-<form class="pure-form pure-form-aligned">
-    <fieldset>
-        <div class="pure-control-group">
-            <label>新闻标题</label>
-            <input ng-model="news.title" type="text" placeholder="新闻标题">
+<body>
+<div ng-app="app">
+    <script type="text/ng-template" id="list.html">
+        <table class="pure-table" width="100%" border="1" style="border-collapse:collapse;">
+            <thead>
+                <td>id</td>
+                <td>标题</td>
+                <td>内容</td>
+                <td>发布时间</td>
+            </thead>
+            <tr ng-repeat="news in newsList">
+                <td>{{news.id}}</td>
+                <td><a href='#/detail/{{news.id}}'>{{news.title}}</a></td>
+                <td>{{news.content}}</td>
+                <td>{{news.date}}</td>
+            </tr>
+        </table>
+    </script>
+
+    <script type="text/ng-template" id="add.html">
+    <h1>添加新闻</h1>
+    标题：<input type="text" ng-model="title"><br>
+            内容：<textarea ng-model="content" cols="30" rows="10" style="vertical-align:top;"></textarea><br>
+                <button ng-click="add()">提交</button>
+    </script>
+
+    <script type="text/ng-template" id="edit.html">
+        <h1>编辑新闻{{news.id}}</h1>
+        标题：<input type="text" ng-model="news.title"><br>
+        内容：<textarea ng-model="news.content" cols="30" rows="10" style="vertical-align:top;"></textarea><br>
+        <button ng-click="update()">提交</button>
+    </script>
+
+    <script type="text/ng-template" id="detail.html">
+        <a href="#/list">返回列表</a>
+        <div id="container">
+            <a href="#/edit/{{news.id}}">编辑</a>
+            <h1>{{news.title}}</h1>
+            <span class="date">发布日期：{{news.date}}</span>
+            <div class="content">正文：   {{news.content}}</div>
         </div>
+    </script>
 
-        <div class="pure-control-group">
-            <label>新闻内容</label>
-            <textarea ng-model="news.content"></textarea>
+    <h1>新闻发布系统</h1>
+    <div id="content">
+        <div id="leftpanel">
+            <ul>
+                <li><a href="#/list">新闻列表</a></li>
+                <li><a href="#/add">发布新闻</a></li>
+            </ul>
         </div>
-
-        <div class="pure-controls">
-
-            <button ng-click="sendNews()" type="button" class="pure-button pure-button-primary">提交</button>
+        <div id="right">
+            <div id="rightpanel" ng-view>abcd</div>
         </div>
-    </fieldset>
-</form>
-
-<ul>
-    <li ng-repeat="news in list">
-        {{news.title}}
-    </li>
-</ul>
-
+    </div>
+</div>
 </body>
 </html>

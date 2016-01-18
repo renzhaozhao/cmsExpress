@@ -1,4 +1,4 @@
-angular.module('app')
+angular.module('app', ['ngRoute'])
 .service('NewsService', function($http){
     function handleReq(method,url,data,success,error){
         var config = {

@@ -8,7 +8,7 @@ module.exports = function(){
     app.use(bodyParser.json());
     app.use(express.static('./public'))
 
-    require('../app/routes/news.server.routes')(app);
+    require('../mvc/routes/route.news')(app);
 
     app.use(function(req,res,next){
         res.status(404);

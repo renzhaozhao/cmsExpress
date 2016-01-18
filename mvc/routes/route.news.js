@@ -1,4 +1,4 @@
-var NewsController = require('../controllers/news.server.ctrl');
+var NewsController = require('../controllers/ctrl.news');
 
 module.exports = function(app){
     //设置跨域访问
