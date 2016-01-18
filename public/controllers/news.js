@@ -10,6 +10,7 @@ angular.module('app')
             $scope.news,
             function(data){
                 console.log(data);
+                alert('提交成功')
             },
             function(err){
                 console.error(err);
