@@ -1,91 +1,28 @@
 var app = angular.module('app.news', [])
 
-.factory('News', function(){
-    var newsList = [{
-        id : 1,
-        title : 'title 1111',
-        content : 'content 1111111',
-        date : new Date()
-    },{
-        id : 2,
-        title : 'title 2222',
-        content : 'content 2222222',
-        date : new Date()
-    },{
-        id : 3,
-        title : 'title 3333',
-        content : 'content 3333333',
-        date : new Date()
-    },{
-        id : 4,
-        title : 'title 4444',
-        content : 'content 4444444',
-        date : new Date()
-    },{
-        id : 3,
-        title : 'title 5555',
-        content : 'content 5555555',
-        date : new Date()
-    },{
-        id : 3,
-        title : 'title 6666',
-        content : 'content 6666666',
-        date : new Date()
-    },{
-        id : 3,
-        title : 'title 7777',
-        content : 'content 7777777',
-        date : new Date()
-    }];
+.factory('News', function($rootScope,$http){
 
     return {
         all: function(){
-            return newsList;
+            var url = Const.SERVER_HOST + 'news';
+            $http.get(url).success(function(data){
+                $rootScope.newsList = [];
+                angular.forEach(data, function(el, key){
+                    el.id = key + 1;
+                    $rootScope.newsList.push(el);
+                });
+            })
         }
     };
 })
 
-.controller('NewsCtrl', function($scope,NewsService){
-    $scope.news = {
-        title: '',
-        content: ''
-    };
-    $scope.sendNews = function(){
-        NewsService.save(
-            $scope.news,
-            function(data){
-                console.log(data);
-                alert('提交成功');
-                $scope.news = {
-                    title: '',
-                    content: ''
-                };
-            },
-            function(err){
-                console.error(err);
-            }
-        )
-    }
-
-
-    $scope.list = [];
-
-    $scope.loadNews = function(){
-        NewsService.list('',function(data){
-            //console.log(data);
-            $scope.list = data;
-        });
-    }
-
-    $scope.loadNews();
-})
-
 .controller('ListCtrl',function($scope,News){
-    $scope.newsList = News.all();
+    News.all();
 })
 
-.controller('DetailCtrl',function($scope,$routeParams,News){
-    $scope.news = News.all()[$routeParams.id-1];
+.controller('DetailCtrl',function($scope,$rootScope,$routeParams,News){
+    News.all();
+    $scope.news = $rootScope.newsList[$routeParams.id-1];
 })
 
 .controller('AddCtrl',function($scope,$location,News){

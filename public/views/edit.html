@@ -1,4 +1,19 @@
-<h1>编辑新闻{{news.id}}</h1>
-标题：<input type="text" ng-model="news.title"><br>
-内容：<textarea ng-model="news.content" cols="30" rows="10" style="vertical-align:top;"></textarea><br>
-<button ng-click="update()">提交</button>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <h1>编辑新闻{{news.id}}</h1>
+        <div class="pure-control-group">
+            <label>新闻标题</label>
+            <input type="text" ng-model="news.title">
+        </div>
+
+        <div class="pure-control-group">
+            <label>新闻内容</label>
+            <textarea ng-model="news.content" cols="30" rows="10" style="vertical-align:top;"></textarea>
+        </div>
+
+        <div class="pure-controls">
+
+            <button ng-click="update()" type="button" class="pure-button pure-button-primary">提交</button>
+        </div>
+    </fieldset>
+</form>
