@@ -6,7 +6,7 @@ var db = mongodb();
 var app = express();
 
 app.listen(config.port, function(){
-    console.log('start in:' + config.port);
+    console.log('start in: http://localhost:' + config.port);
 })
 
 module.exports = app;

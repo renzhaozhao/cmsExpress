@@ -18,5 +18,8 @@ module.exports = function(app){
     app.route('/news/:nid')
         .get(NewsController.get);
 
+    app.route('/edit/:nid')
+        .post(NewsController.update);
+
     app.param('nid', NewsController.getById);
 }

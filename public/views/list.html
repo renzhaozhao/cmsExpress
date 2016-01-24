@@ -6,9 +6,9 @@
         <td>发布时间</td>
     </thead>
     <tr ng-repeat="news in newsList">
-        <td>{{news.id}}</td>
-        <td><a href='#/detail/{{news.id}}'>{{news.title}}</a></td>
+        <td>{{news._id}}</td>
+        <td><a class="orange" href='#/detail/{{news._id}}'>{{news.title}}</a></td>
         <td>{{news.content}}</td>
-        <td>{{news.date}}</td>
+        <td>{{news.day}}&nbsp;{{news.time}}</td>
     </tr>
 </table>

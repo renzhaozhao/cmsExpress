@@ -8,5 +8,5 @@ gulp.task("less", cssTask);
 
 gulp.task("watch", watchTask);
 
-gulp.task('init', ['less', 'javascript']);
+gulp.task('init', ['less']);
 gulp.task('default', ['watch']);

@@ -13,11 +13,11 @@ module.exports = {
     },
     list: function(req,res,next){
         var pagesize = parseInt(req.query.pagesize, 10) || 10;
-        var pagestart = parseInt(req.query.pagestart, 10) || 1;
+        var page = parseInt(req.query.page, 10) || 1;
 
         News
         .find()
-        .skip((pagestart-1)*pagesize)
+        .skip((page-1)*pagesize)
         .limit(pagesize)
         .exec(function(err,docs){
             if(err){
@@ -37,7 +37,7 @@ module.exports = {
             if(err){
                 return next(err);
             }
-            if(doc){
+            if(!doc){
                 return next(new Error('News not Found'));
             }
 
@@ -46,6 +46,19 @@ module.exports = {
         })
     },
     get: function(req,res,next){
+        return res.json(req.news);
+    },
+    update: function(req,res,next){
+        console.log(req.query);
+        var update = {$set: req.query};
+        News.update({_id:req.query._id},update,function(error){
+            if(error){
+                return next(error);
+            }
+            else{
+                console.log('Update success!')
+            }
+        })
         return res.json(req.news);
     }
 }
