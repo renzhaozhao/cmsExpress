@@ -1,9 +1,8 @@
 var app = angular.module('app.news', [])
 
-.factory('News', function($rootScope,$http){
-
+.factory('News', function($rootScope, $http) {
     return {
-        all: function(page){
+        all: function(page) {
             var url = Const.SERVER_HOST + 'news';
             $http({
                 method: 'GET',
@@ -11,10 +10,9 @@ var app = angular.module('app.news', [])
                 params: {
                     page: page
                 }
-            })
-            .success(function(data){
+            }).success(function(data) {
                 $rootScope.newsList = [];
-                angular.forEach(data, function(el, key){
+                angular.forEach(data, function(el, key) {
                     var newDate = new Date(el.createTime);
                     el.time = Time.getTimes(newDate);
                     el.day = Time.getDays(newDate);
@@ -25,16 +23,16 @@ var app = angular.module('app.news', [])
     };
 })
 
-.controller('ListCtrl',function($scope,News){
+.controller('ListCtrl', function($scope, News) {
     News.all();
 })
 
-.controller('DetailCtrl',function($scope,$http,$rootScope,$routeParams,$location,News){
+.controller('DetailCtrl', function($scope, $http, $rootScope, $routeParams, $location, News) {
+    console.log($routeParams);
     $http({
         method: 'GET',
         url: Const.SERVER_HOST + 'news/' + $routeParams.id
-    })
-    .success(function(data){
+    }).success(function(data) {
         $scope.news = data;
     })
 })
@@ -44,10 +42,10 @@ var app = angular.module('app.news', [])
 //     $scope.news = $rootScope.newsList[$routeParams.id-1];
 // })
 
-.controller('AddCtrl',function($scope,$http,$location,News){
+.controller('AddCtrl', function($scope, $http, $location, News) {
     $scope.title = '';
     $scope.content = '';
-    $scope.add = function(){
+    $scope.add = function() {
         $http({
             method: 'POST',
             url: Const.SERVER_HOST + 'news',
@@ -56,8 +54,7 @@ var app = angular.module('app.news', [])
                 content: $scope.content,
                 createTime: new Date()
             }
-        })
-        .success(function(data){
+        }).success(function(data) {
             alert('发布成功');
         })
 
@@ -65,18 +62,17 @@ var app = angular.module('app.news', [])
     }
 })
 
-.controller('EditCtrl',function($scope,$http,$routeParams,$location){
+.controller('EditCtrl', function($scope, $http, $routeParams, $location) {
     $scope.news = {
         _id: $routeParams.id
     }
 
-    $scope.update = function(){
+    $scope.update = function() {
         $http({
             method: 'POST',
             url: Const.SERVER_HOST + 'edit/' + $routeParams.id,
             data: $scope.news
-        })
-        .success(function(data){
+        }).success(function(data) {
             alert('编辑成功');
             $location.path('list');
         })
